@@ -1,0 +1,182 @@
+[
+  {
+    "employee_id": "E001",
+    "name": "Aditi Sharma",
+    "role": "Frontend Developer",
+    "skills": ["React", "Redux", "JavaScript", "HTML", "CSS"],
+    "experience": 3,
+    "availability": "bench",
+    "email": "nimbalkarss123@gmail.com"
+  },
+  {
+    "employee_id": "E002",
+    "name": "Rahul Singh",
+    "role": "Backend Developer",
+    "skills": ["Node.js", "Express.js", "MongoDB", "Docker"],
+    "experience": 4,
+    "availability": "bench",
+    "email": "aniketlokhande3654@gmail.com"
+  },
+  {
+    "employee_id": "E003",
+    "name": "Sneha Patel",
+    "role": "Data Analyst",
+    "skills": ["Python", "Pandas", "Power BI", "Sentiment Analysis"],
+    "experience": 2,
+    "availability": "bench",
+    "email": "nimbalkarss7021@gmail.com"
+  },
+  {
+    "employee_id": "E004",
+    "name": "Vikram Iyer",
+    "role": "DevOps Engineer",
+    "skills": ["AWS", "Docker", "CI/CD", "Terraform", "Kubernetes"],
+    "experience": 5,
+    "availability": "bench",
+    "email": "aniketlokhande3654@gmail.com"
+  },
+  {
+    "employee_id": "E005",
+    "name": "Priya Nair",
+    "role": "Project Manager",
+    "skills": ["Agile", "Scrum", "Team Leadership", "Jira", "Communication"],
+    "experience": 6,
+    "availability": "bench",
+    "email": "nimbalkarss7021@gmail.com"
+  },
+  {
+    "employee_id": "E006",
+    "name": "Rohan Mehta",
+    "role": "Backend Developer",
+    "skills": ["Node.js", "Express.js", "PostgreSQL", "GraphQL"],
+    "experience": 3,
+    "availability": "bench",
+    "email": "nimbalkarss123@gmail.com"
+  },
+  {
+    "employee_id": "E007",
+    "name": "Kavita Deshmukh",
+    "role": "Frontend Developer",
+    "skills": ["React", "TypeScript", "Next.js", "Tailwind CSS"],
+    "experience": 4,
+    "availability": "bench",
+    "email": "aniketlokhande3654@gmail.com"
+  },
+  {
+    "employee_id": "E008",
+    "name": "Arjun Verma",
+    "role": "Data Scientist",
+    "skills": ["Python", "Machine Learning", "NLP", "Sentiment Analysis"],
+    "experience": 3,
+    "availability": "bench",
+    "email": "nimbalkarss123@gmail.com"
+  },
+  {
+    "employee_id": "E009",
+    "name": "Manasi Kulkarni",
+    "role": "Database Administrator",
+    "skills": ["MongoDB", "MySQL", "Backup Management", "Query Optimization"],
+    "experience": 5,
+    "availability": "bench",
+    "email": "nimbalkarss7021@gmail.com"
+  },
+  {
+    "employee_id": "E010",
+    "name": "Ritesh Pandey",
+    "role": "Full Stack Developer",
+    "skills": ["React", "Node.js", "MongoDB", "AWS"],
+    "experience": 4,
+    "availability": "bench",
+    "email": "aniketlokhande3654@gmail.com"
+  },
+  {
+    "employee_id": "E011",
+    "name": "Shreya Gude",
+    "role": "AI Engineer",
+    "skills": ["Python", "Transformers", "LangChain", "OpenAI API", "LLM Integration"],
+    "experience": 3,
+    "availability": "bench",
+    "email": "shreyajaygude425@gmail.com"
+  },
+  {
+    "employee_id": "E012",
+    "name": "Aniket Jadhav",
+    "role": "HR Automation Engineer",
+    "skills": ["Python", "RPA", "Zapier", "Google Workspace API", "Slack Integration"],
+    "experience": 5,
+    "availability": "bench",
+    "email": "nimbalkarss123@gmail.com"
+  },
+  {
+    "employee_id": "E013",
+    "name": "Soham Nimbalkar",
+    "role": "System Designer",
+    "skills": ["Microservices", "System Design", "Scalability", "AWS", "Kafka"],
+    "experience": 5,
+    "availability": "bench",
+    "email": "nimbalkarss123@gmail.com"
+  },
+  {
+    "employee_id": "E014",
+    "name": "Jay Patel",
+    "role": "Data Engineer",
+    "skills": ["Airflow", "Spark", "Python", "ETL", "AWS Glue"],
+    "experience": 4,
+    "availability": "bench",
+    "email": "aniketlokhande3654@gmail.com"
+  },
+  {
+    "employee_id": "E015",
+    "name": "Riya Sen",
+    "role": "Frontend Developer",
+    "skills": ["Vue.js", "JavaScript", "HTML", "CSS"],
+    "experience": 3,
+    "availability": "bench",
+    "email": "shreyajaygude425@gmail.com"
+  },
+  {
+    "employee_id": "E016",
+    "name": "Abhishek Gupta",
+    "role": "Backend Developer",
+    "skills": ["Django", "Python", "REST API", "PostgreSQL"],
+    "experience": 4,
+    "availability": "bench",
+    "email": "nimbalkarss7021@gmail.com"
+  },
+  {
+    "employee_id": "E017",
+    "name": "Divya Rao",
+    "role": "Cloud Architect",
+    "skills": ["AWS", "Azure", "Kubernetes", "Terraform", "CI/CD"],
+    "experience": 6,
+    "availability": "bench",
+    "email": "shreyajaygude425@gmail.com"
+  },
+  {
+    "employee_id": "E018",
+    "name": "Aarav Joshi",
+    "role": "Machine Learning Engineer",
+    "skills": ["Python", "TensorFlow", "Scikit-learn", "NLP", "Data Preprocessing"],
+    "experience": 4,
+    "availability": "bench",
+    "email": "aniketlokhande3654@gmail.com"
+  },
+  {
+    "employee_id": "E019",
+    "name": "Meera Kulkarni",
+    "role": "Business Analyst",
+    "skills": ["Excel", "Power BI", "SQL", "Project Documentation", "Requirement Gathering"],
+    "experience": 5,
+    "availability": "bench",
+    "email": "nimbalkarss7021@gmail.com"
+  },
+  {
+    "employee_id": "E020",
+    "name": "Tanmay Shah",
+    "role": "FinTech Developer",
+    "skills": ["Python", "FastAPI", "PostgreSQL", "Finance APIs", "Data Visualization"],
+    "experience": 4,
+    "availability": "bench",
+    "email": "shreyajaygude425@gmail.com"
+  }
+]

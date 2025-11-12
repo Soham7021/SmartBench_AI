@@ -1,0 +1,16 @@
+[
+    {
+        "employee_id": "E001",
+        "name": "Aditi Sharma",
+        "role": "Frontend Developer",
+        "email": "nimbalkarss123@gmail.com",
+        "skills": [
+            "React",
+            "Redux",
+            "JavaScript",
+            "HTML",
+            "CSS"
+        ],
+        "fit_score": 65
+    }
+]

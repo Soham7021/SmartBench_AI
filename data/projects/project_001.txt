@@ -1,0 +1,25 @@
+Project Title: Customer Feedback Portal
+
+Description:
+Our retail client wants a web-based portal where customers can submit feedback and view analytics dashboards. 
+The system should collect customer feedback, perform sentiment analysis, and visualize key metrics on a dashboard.
+
+Functional Requirements:
+- Web interface for customers to submit reviews and ratings.
+- Admin dashboard to analyze feedback trends and sentiment.
+- Integration with existing customer database.
+- Reports exportable in CSV and PDF.
+
+Technical Requirements:
+- Should support at least 10,000 concurrent users.
+- Should be deployable on AWS.
+- Data must be stored securely.
+- Must include analytics and sentiment analysis modules.
+
+Expected Deliverables:
+- Frontend dashboard
+- REST API backend
+- Database schema
+- DevOps setup
+
+Domain: Retail and Customer Experience

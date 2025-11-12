@@ -1,0 +1,22 @@
+{
+    "project_name": "Customer Feedback Portal",
+    "summary": "Web-based portal for customers to submit feedback and view analytics dashboards",
+    "required_roles": [
+        "Project Manager",
+        "Backend Developer",
+        "Frontend Developer",
+        "DevOps Engineer",
+        "Data Analyst"
+    ],
+    "required_skills": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "React",
+        "Node.js",
+        "AWS",
+        "Database Design",
+        "Sentiment Analysis"
+    ],
+    "domain": "Retail and Customer Experience"
+}
