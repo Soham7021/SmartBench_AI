@@ -3,20 +3,20 @@
     "summary": "Web-based portal for customers to submit feedback and view analytics dashboards",
     "required_roles": [
         "Project Manager",
-        "Backend Developer",
         "Frontend Developer",
+        "Backend Developer",
         "DevOps Engineer",
-        "Data Analyst"
+        "Database Administrator"
     ],
     "required_skills": [
-        "HTML5",
-        "CSS3",
+        "HTML/CSS",
         "JavaScript",
-        "React",
-        "Node.js",
+        "Python",
         "AWS",
+        "Sentiment Analysis",
+        "Data Visualization",
         "Database Design",
-        "Sentiment Analysis"
+        "DevOps Tools"
     ],
     "domain": "Retail and Customer Experience"
 }
