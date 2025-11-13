@@ -1,22 +1,24 @@
 {
-    "project_name": "Customer Feedback Portal",
-    "summary": "Web-based portal for customers to submit feedback and view analytics dashboards",
+    "project_name": "AI-Powered Customer Sentiment Analysis Dashboard",
+    "summary": "Automate customer sentiment analysis from multiple sources and generate real-time analytics for business decision-making.",
     "required_roles": [
-        "Project Manager",
-        "Frontend Developer",
+        "Machine Learning Engineer",
         "Backend Developer",
-        "DevOps Engineer",
-        "Database Administrator"
+        "Frontend Developer",
+        "Data Engineer",
+        "DevOps Engineer"
     ],
     "required_skills": [
-        "HTML/CSS",
-        "JavaScript",
         "Python",
+        "NLP",
+        "Scikit-learn",
+        "TensorFlow/PyTorch",
+        "FastAPI / Flask",
+        "React.js / Next.js",
+        "PostgreSQL / MongoDB",
+        "Docker",
         "AWS",
-        "Sentiment Analysis",
-        "Data Visualization",
-        "Database Design",
-        "DevOps Tools"
+        "CI/CD pipelines"
     ],
-    "domain": "Retail and Customer Experience"
+    "domain": "Artificial Intelligence / SaaS Analytics"
 }

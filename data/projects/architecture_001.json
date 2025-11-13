@@ -1,89 +1,76 @@
 {
     "architecture": {
         "frontend": {
-            "type": "Single-page application",
-            "recommended_stack": [
-                "React",
-                "Redux",
-                "HTML5",
-                "CSS3"
-            ]
+            "type": "Single-Page Application",
+            "technology": "React.js"
         },
         "backend": {
-            "type": "RESTful API",
-            "recommended_stack": [
-                "Python",
-                "Flask",
-                "SQLAlchemy",
-                "AWS Lambda"
-            ]
+            "type": "API-First",
+            "technology": "FastAPI"
         },
         "database": {
-            "type": "Relational database",
-            "recommended_stack": [
-                "PostgreSQL",
-                "AWS RDS"
-            ]
+            "type": "Relational",
+            "technology": "PostgreSQL"
         },
         "cloud": {
-            "type": "Serverless",
-            "recommended_stack": [
-                "AWS Lambda",
-                "API Gateway",
-                "S3"
+            "provider": "AWS",
+            "services": [
+                "EC2",
+                "RDS",
+                "S3",
+                "Lambda"
             ]
         }
     },
     "recommended_stack": {
-        "libraries": [
-            " NumPy",
-            "Pandas",
-            "Matplotlib",
-            "Seaborn"
+        "machine_learning": [
+            "Scikit-learn",
+            "TensorFlow"
         ],
-        "frameworks": [
-            "Flask",
-            "Django"
+        "data_processing": [
+            "Pandas",
+            " NumPy"
+        ],
+        "data_storage": [
+            "PostgreSQL",
+            "MongoDB"
+        ],
+        "web_framework": [
+            "FastAPI",
+            "Flask"
+        ],
+        "frontend_framework": [
+            "React.js",
+            "Next.js"
+        ],
+        "ci_cd": [
+            "Jenkins",
+            "CircleCI"
         ]
     },
     "modules": [
         {
-            "name": "Feedback Submission",
-            "description": "Module responsible for handling customer feedback submission"
+            "name": "Data Ingestion",
+            "description": "Collect and preprocess customer feedback data from multiple sources"
         },
         {
-            "name": "Analytics Dashboard",
-            "description": "Module responsible for generating analytics dashboards"
+            "name": "Machine Learning",
+            "description": "Train and deploy AI models for sentiment analysis"
         },
         {
-            "name": "Sentiment Analysis",
-            "description": "Module responsible for performing sentiment analysis on customer feedback"
+            "name": "Data Analytics",
+            "description": "Generate real-time analytics and visualizations for business decision-making"
+        },
+        {
+            "name": "API Gateway",
+            "description": "Handle incoming requests and route them to the appropriate backend services"
+        },
+        {
+            "name": "Dashboard",
+            "description": "Display real-time analytics and sentiment analysis results to users"
         }
     ],
     "data_flow": {
-        "feedback_submission": {
-            "description": "Customer submits feedback through the frontend",
-            "steps": [
-                "Data is sent to the backend API",
-                "API processes and validates the data",
-                "Validated data is stored in the database"
-            ]
-        },
-        "sentiment_analysis": {
-            "description": "Sentiment analysis is performed on stored feedback data",
-            "steps": [
-                "Data is retrieved from the database",
-                "Sentiment analysis is performed using machine learning algorithms",
-                "Results are stored in the database"
-            ]
-        },
-        "analytics_dashboard": {
-            "description": "Analytics dashboard is generated using stored data",
-            "steps": [
-                "Data is retrieved from the database",
-                "Data is processed and visualized using data visualization libraries",
-                "Dashboard is rendered in the frontend"
-            ]
-        }
+        "description": "Customer feedback data is collected from multiple sources and stored in a PostgreSQL database. The data is then processed and pre-trained AI models are trained using Scikit-learn and TensorFlow. The trained models are deployed as AWS Lambda functions. The API Gateway handles incoming requests and routes them to the appropriate backend services. The backend services use FastAPI to generate real-time analytics and visualizations, which are then displayed in the React.js-based dashboard."
     }
 }

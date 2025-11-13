@@ -1,30 +1,17 @@
 [
     {
-        "employee_id": "E001",
-        "name": "Aditi Sharma",
-        "role": "Frontend Developer",
-        "email": "nimbalkarss123@gmail.com",
+        "employee_id": "E018",
+        "name": "Aarav Joshi",
+        "role": "Machine Learning Engineer",
+        "email": "aniketlokhande3654@gmail.com",
         "skills": [
-            "React",
-            "Redux",
-            "JavaScript",
-            "HTML",
-            "CSS"
+            "Python",
+            "TensorFlow",
+            "Scikit-learn",
+            "NLP",
+            "Data Preprocessing"
         ],
-        "fit_score": 47
-    },
-    {
-        "employee_id": "E015",
-        "name": "Riya Sen",
-        "role": "Frontend Developer",
-        "email": "shreyajaygude425@gmail.com",
-        "skills": [
-            "Vue.js",
-            "JavaScript",
-            "HTML",
-            "CSS"
-        ],
-        "fit_score": 47
+        "fit_score": 58
     },
     {
         "employee_id": "E004",
@@ -38,7 +25,7 @@
             "Terraform",
             "Kubernetes"
         ],
-        "fit_score": 38
+        "fit_score": 44
     },
     {
         "employee_id": "E016",
@@ -51,7 +38,7 @@
             "REST API",
             "PostgreSQL"
         ],
-        "fit_score": 38
+        "fit_score": 44
     },
     {
         "employee_id": "E002",
@@ -64,21 +51,7 @@
             "MongoDB",
             "Docker"
         ],
-        "fit_score": 30
-    },
-    {
-        "employee_id": "E005",
-        "name": "Priya Nair",
-        "role": "Project Manager",
-        "email": "nimbalkarss7021@gmail.com",
-        "skills": [
-            "Agile",
-            "Scrum",
-            "Team Leadership",
-            "Jira",
-            "Communication"
-        ],
-        "fit_score": 30
+        "fit_score": 37
     },
     {
         "employee_id": "E006",
@@ -90,6 +63,34 @@
             "Express.js",
             "PostgreSQL",
             "GraphQL"
+        ],
+        "fit_score": 37
+    },
+    {
+        "employee_id": "E014",
+        "name": "Jay Patel",
+        "role": "Data Engineer",
+        "email": "aniketlokhande3654@gmail.com",
+        "skills": [
+            "Airflow",
+            "Spark",
+            "Python",
+            "ETL",
+            "AWS Glue"
+        ],
+        "fit_score": 37
+    },
+    {
+        "employee_id": "E001",
+        "name": "Aditi Sharma",
+        "role": "Frontend Developer",
+        "email": "nimbalkarss123@gmail.com",
+        "skills": [
+            "React",
+            "Redux",
+            "JavaScript",
+            "HTML",
+            "CSS"
         ],
         "fit_score": 30
     },
@@ -107,15 +108,15 @@
         "fit_score": 30
     },
     {
-        "employee_id": "E009",
-        "name": "Manasi Kulkarni",
-        "role": "Database Administrator",
-        "email": "nimbalkarss7021@gmail.com",
+        "employee_id": "E015",
+        "name": "Riya Sen",
+        "role": "Frontend Developer",
+        "email": "shreyajaygude425@gmail.com",
         "skills": [
-            "MongoDB",
-            "MySQL",
-            "Backup Management",
-            "Query Optimization"
+            "Vue.js",
+            "JavaScript",
+            "HTML",
+            "CSS"
         ],
         "fit_score": 30
     }

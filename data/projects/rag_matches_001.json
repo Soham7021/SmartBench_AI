@@ -3,30 +3,30 @@
         "employee_id": "E010",
         "name": "Ritesh Pandey",
         "email": "aniketlokhande3654@gmail.com",
-        "similarity_score": 0.9388
+        "similarity_score": 0.9386
     },
     {
         "employee_id": "E010",
         "name": "Ritesh Pandey",
         "email": "aniketlokhande3654@gmail.com",
-        "similarity_score": 0.9388
+        "similarity_score": 0.9386
     },
     {
         "employee_id": "E006",
         "name": "Rohan Mehta",
         "email": "nimbalkarss123@gmail.com",
-        "similarity_score": 1.0922
+        "similarity_score": 1.092
     },
     {
         "employee_id": "E006",
         "name": "Rohan Mehta",
         "email": "nimbalkarss123@gmail.com",
-        "similarity_score": 1.0923
+        "similarity_score": 1.0921
     },
     {
         "employee_id": "E002",
         "name": "Rahul Singh",
         "email": "aniketlokhande3654@gmail.com",
-        "similarity_score": 1.1279
+        "similarity_score": 1.1278
     }
 ]
