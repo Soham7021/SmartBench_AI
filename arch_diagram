@@ -1,0 +1,14 @@
+digraph Architecture {
+	bgcolor=white rankdir=TB
+	Frontend [label="Frontend
+{'type': 'Single-Page Application', 'technology': 'React.js'}" fillcolor=lightblue shape=box style=filled]
+	Backend [label="Backend
+{'type': 'API-First', 'technology': 'FastAPI'}" fillcolor=lightyellow shape=box style=filled]
+	Database [label="Database
+{'type': 'Relational', 'technology': 'PostgreSQL'}" fillcolor=lightgreen shape=box style=filled]
+	Cloud [label="Cloud
+{'provider': 'AWS', 'services': ['EC2', 'RDS', 'S3', 'Lambda']}" fillcolor=violet shape=box style=filled]
+	Frontend -> Backend
+	Backend -> Database
+	Backend -> Cloud
+}

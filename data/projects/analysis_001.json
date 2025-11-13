@@ -1,6 +1,6 @@
 {
     "project_name": "AI-Powered Customer Sentiment Analysis Dashboard",
-    "summary": "Automate customer sentiment analysis from multiple sources and generate real-time analytics for business decision-making.",
+    "summary": "Develop an intelligent web-based dashboard for analyzing customer feedback from multiple sources, classifying sentiment, and generating real-time analytics.",
     "required_roles": [
         "Machine Learning Engineer",
         "Backend Developer",

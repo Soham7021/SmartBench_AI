@@ -1,76 +1,46 @@
 {
     "architecture": {
-        "frontend": {
-            "type": "Single-Page Application",
-            "technology": "React.js"
-        },
-        "backend": {
-            "type": "API-First",
-            "technology": "FastAPI"
-        },
-        "database": {
-            "type": "Relational",
-            "technology": "PostgreSQL"
-        },
-        "cloud": {
-            "provider": "AWS",
-            "services": [
-                "EC2",
-                "RDS",
-                "S3",
-                "Lambda"
-            ]
-        }
+        "frontend": "React.js",
+        "backend": "Java Spring Boot",
+        "database": "MongoDB",
+        "cloud": "AWS"
     },
-    "recommended_stack": {
-        "machine_learning": [
-            "Scikit-learn",
-            "TensorFlow"
-        ],
-        "data_processing": [
-            "Pandas",
-            " NumPy"
-        ],
-        "data_storage": [
-            "PostgreSQL",
-            "MongoDB"
-        ],
-        "web_framework": [
-            "FastAPI",
-            "Flask"
-        ],
-        "frontend_framework": [
-            "React.js",
-            "Next.js"
-        ],
-        "ci_cd": [
-            "Jenkins",
-            "CircleCI"
-        ]
-    },
+    "recommended_stack": [
+        "React.js",
+        "Java",
+        "Spring Boot",
+        "MongoDB",
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "Jenkins",
+        "Prometheus",
+        "Grafana"
+    ],
     "modules": [
         {
             "name": "Data Ingestion",
-            "description": "Collect and preprocess customer feedback data from multiple sources"
+            "description": "Module responsible for collecting customer feedback from various sources (e.g., social media, surveys, reviews)."
         },
         {
-            "name": "Machine Learning",
-            "description": "Train and deploy AI models for sentiment analysis"
+            "name": "Sentiment Analysis",
+            "description": "Module that uses NLP techniques to classify the sentiment of customer feedback (positive, negative, neutral)."
         },
         {
-            "name": "Data Analytics",
-            "description": "Generate real-time analytics and visualizations for business decision-making"
+            "name": "Data Storage",
+            "description": "Module for storing processed customer feedback and sentiment scores in MongoDB."
         },
         {
-            "name": "API Gateway",
-            "description": "Handle incoming requests and route them to the appropriate backend services"
+            "name": "API",
+            "description": "REST API built with Spring Boot to expose sentiment analysis results and analytics."
         },
         {
             "name": "Dashboard",
-            "description": "Display real-time analytics and sentiment analysis results to users"
+            "description": "Interactive React.js dashboard for visualizing sentiment trends and analytics."
         }
     ],
     "data_flow": {
-        "description": "Customer feedback data is collected from multiple sources and stored in a PostgreSQL database. The data is then processed and pre-trained AI models are trained using Scikit-learn and TensorFlow. The trained models are deployed as AWS Lambda functions. The API Gateway handles incoming requests and routes them to the appropriate backend services. The backend services use FastAPI to generate real-time analytics and visualizations, which are then displayed in the React.js-based dashboard."
-    }
+        "description": "Customer feedback is ingested, processed for sentiment, stored in MongoDB, and visualized on the dashboard via the API."
+    },
+    "diagram_graphviz": "digraph Architecture {\n  node [shape=circle, style=filled, fillcolor=skyblue];\n\n  Frontend [label=\"Frontend (React.js)\", fillcolor=lightgreen];\n  Backend [label=\"Backend (Java Spring Boot)\", fillcolor=orange];\n  Database [label=\"Database (MongoDB)\", fillcolor=yellow];\n  Cloud [label=\"Cloud (AWS)\", fillcolor=lightcoral];\n  DataIngestion [label=\"Data Ingestion\", fillcolor=lightblue];\n  SentimentAnalysis [label=\"Sentiment Analysis\", fillcolor=lightblue];\n  API [label=\"API\", fillcolor=lightblue];\n  Dashboard [label=\"Dashboard\", fillcolor=lightblue];\n\n  Frontend -> API [label=\"Requests Data\"];\n  API -> Backend [label=\"Processes Request\"];\n  Backend -> SentimentAnalysis [label=\"Analyzes Sentiment\"];\n  Backend -> DataIngestion [label=\"Ingests Data\"];\n  Backend -> Database [label=\"Stores/Retrieves Data\"];\n  Cloud -> Database [label=\"Hosts\"];\n  Cloud -> Backend [label=\"Hosts\"];\n  Cloud -> Frontend [label=\"Hosts\"];\n  DataIngestion -> SentimentAnalysis [label=\"Sends Data\"];\n  SentimentAnalysis -> Database [label=\"Stores Results\"];\n  Dashboard -> Frontend [label=\"Displays\"];\n\n  subgraph cluster_modules {\n    node [style=filled, fillcolor=white];\n    label = \"Modules\";\n    DataIngestion; SentimentAnalysis; API; Dashboard;\n  }\n\n  subgraph cluster_tech {\n    node [style=filled, fillcolor=white];\n    label = \"Technology Stack\";\n    Frontend; Backend; Database; Cloud;\n  }\n}\n"
 }

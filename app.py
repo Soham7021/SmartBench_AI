@@ -5,10 +5,14 @@ from pathlib import Path
 from datetime import datetime
 
 # Import agents
+from agents.architect_agent import redesign_architecture
 from agents.analyzer_agent import analyze_project, save_analysis
 from agents.architect_agent import design_architecture, save_architecture
 from agents.matcher_agent import main as run_matcher
 from agents.notifier_agent import notify_all_shortlisted
+
+if "ask_feedback" not in st.session_state:
+    st.session_state.ask_feedback = False
 
 # -------------------------------------------------------------------
 # 📁 Paths
@@ -53,6 +57,17 @@ def display_architecture(architecture: dict):
             <span>🕒 Last Updated: {ts}</span>
         </div>
         """, unsafe_allow_html=True)
+
+    # ---------------------------------------------------------
+    # 📊 NEW: Display Graphviz Diagram (if provided)
+    # ---------------------------------------------------------
+    if "diagram_graphviz" in architecture:
+        st.markdown("### 📊 Architecture Diagram")
+        try:
+            st.graphviz_chart(architecture["diagram_graphviz"])
+        except Exception as e:
+            st.error(f"❌ Diagram render error: {e}")
+            st.text(architecture["diagram_graphviz"])
 
     col1, col2 = st.columns(2, gap="large")
 
@@ -129,6 +144,7 @@ def display_architecture(architecture: dict):
         <p class='data-flow-desc'>{desc}</p>
     </div>
     """, unsafe_allow_html=True)
+
 
 # -------------------------------------------------------------------
 # 🎨 Custom CSS Styling
@@ -613,13 +629,49 @@ if ANALYSIS_FILE.exists():
 # -------------------------------------------------------------------
 # 📘 Step 3: Review & Approve Architecture
 # -------------------------------------------------------------------
+# Initialize session state flag
+if "ask_feedback" not in st.session_state:
+    st.session_state.ask_feedback = False
+
+# -------------------------------------------------------------------
+# 📘 Step 3: Review & Approve Architecture
+# -------------------------------------------------------------------
 if ARCH_FILE.exists():
     st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
-    
+
     with open(ARCH_FILE, "r", encoding="utf-8") as f:
         architecture = json.load(f)
 
-    # 🎨 Display architecture
+    # ---------------------------------------------------------------
+    # 🔧 FIX malformed JSON from LLM (string → proper structure)
+    # ---------------------------------------------------------------
+    arch_section = architecture.get("architecture")
+
+    # If architecture["architecture"] came as a string → convert to dict
+    if isinstance(arch_section, str):
+        architecture["architecture"] = {
+            "frontend": arch_section,
+            "backend": "Not provided",
+            "database": "Not provided",
+            "cloud": "Not provided"
+        }
+
+    # Fix modules string list → list of dicts
+    if isinstance(architecture.get("modules"), str):
+        architecture["modules"] = [
+            {"name": m.strip(), "description": ""} 
+            for m in architecture["modules"].split(",")
+        ]
+
+    # Fix recommended_stack string → list
+    if isinstance(architecture.get("recommended_stack"), str):
+        architecture["recommended_stack"] = [
+            s.strip() for s in architecture["recommended_stack"].split(",")
+        ]
+
+    # ---------------------------------------------------------------
+    # 🎨 Display architecture visually
+    # ---------------------------------------------------------------
     display_architecture(architecture)
 
     col1, col2 = st.columns(2, gap="large")
@@ -628,11 +680,41 @@ if ARCH_FILE.exists():
     with col2:
         regenerate = st.button("🔁 Re-generate Architecture", use_container_width=True)
 
+    # Open feedback box
     if regenerate:
-        with st.spinner("🔄 Re-generating architecture..."):
-            arch_data = design_architecture(str(ANALYSIS_FILE))
-            save_architecture("001", arch_data)
-        st.toast("🔃 Architecture regenerated — refreshing view...", icon="♻️")
+        st.session_state.ask_feedback = True
+
+
+# -------------------------------------------------------------------
+# ✏️ Step 3B — Ask for feedback when regenerate is clicked
+# -------------------------------------------------------------------
+if st.session_state.ask_feedback:
+    st.markdown("### ✏️ What changes do you want in the architecture?")
+
+    feedback = st.text_area(
+        "Example: Switch backend to Java Spring Boot, use MongoDB instead of PostgreSQL, remove Kafka, add Redis cache, etc.",
+        placeholder="Describe the changes you want...",
+    )
+
+    colA, colB = st.columns([1, 1])
+    with colA:
+        apply_changes = st.button("♻️ Apply Changes")
+    with colB:
+        cancel_changes = st.button("❌ Cancel")
+
+    # Apply redesign
+    if apply_changes:
+        with st.spinner("Re-generating architecture with your feedback..."):
+            new_arch = redesign_architecture(str(ANALYSIS_FILE), feedback)
+            save_architecture("001", new_arch)
+
+        st.session_state.ask_feedback = False
+        st.toast("✨ Architecture updated according to your feedback!", icon="🚀")
+        st.rerun()
+
+    # Cancel redesign
+    if cancel_changes:
+        st.session_state.ask_feedback = False
         st.rerun()
 
 # -------------------------------------------------------------------

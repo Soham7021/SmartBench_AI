@@ -1,15 +1,1 @@
-[
-    {
-        "employee_id": "E007",
-        "name": "Kavita Deshmukh",
-        "role": "Frontend Developer",
-        "email": "aniketlokhande3654@gmail.com",
-        "skills": [
-            "React",
-            "TypeScript",
-            "Next.js",
-            "Tailwind CSS"
-        ],
-        "fit_score": 30
-    }
-]
+[]

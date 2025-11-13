@@ -1,122 +1,164 @@
 import os
 import json
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
-# ---------------------------------------------------------------------
-# 1️⃣ Environment Setup
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------
+# 1️⃣ Load ENV
+# ------------------------------------------------------------
 load_dotenv()
+g_api_key = os.getenv("GOOGLE_API_KEY")
 
-api_key = os.getenv("OPENROUTER_API_KEY")
-base_url = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
+if not g_api_key:
+    raise ValueError("❌ GOOGLE_API_KEY missing in .env")
 
-if not api_key:
-    raise ValueError("❌ OPENROUTER_API_KEY missing in .env")
-
-# ---------------------------------------------------------------------
-# 2️⃣ Initialize LLM via OpenRouter
-# ---------------------------------------------------------------------
-llm = ChatOpenAI(
-    model="meta-llama/llama-3-8b-instruct",
-    temperature=0.25,
-    max_tokens=1000,
-    api_key=api_key,
-    base_url=base_url,
+# ------------------------------------------------------------
+# 2️⃣ Initialize Gemini 2.0 Flash
+# ------------------------------------------------------------
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash",
+    google_api_key=g_api_key,
+    temperature=0.2,
+    max_output_tokens=3000,
 )
 
-# ---------------------------------------------------------------------
-# 3️⃣ Core Architect Agent Logic
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------
+# 3️⃣ Helper — ensure JSON output
+# ------------------------------------------------------------
+def _ask_llm(prompt: str) -> dict:
+    """Ask LLM and ensure JSON is parsed safely."""
+    response = llm.invoke([
+        SystemMessage(content="You are Gemini. Follow instructions EXACTLY."),
+        HumanMessage(content=prompt)
+    ])
+
+    raw = response.content.strip()
+    cleaned = raw.replace("```json", "").replace("```", "")
+
+    try:
+        return json.loads(cleaned)
+    except:
+        print("⚠️ JSON parse failed. Returning raw output.")
+        return {"raw_response": raw}
+
+# ------------------------------------------------------------
+# 4️⃣ Strict JSON Schema (important)
+# ------------------------------------------------------------
+ARCH_SCHEMA = """
+{
+  "architecture": {
+    "frontend": "string",
+    "backend": "string",
+    "database": "string",
+    "cloud": "string"
+  },
+  "recommended_stack": [
+    "string"
+  ],
+  "modules": [
+    {
+      "name": "string",
+      "description": "string"
+    }
+  ],
+  "data_flow": {
+    "description": "string"
+  },
+  "diagram_graphviz": "string"
+}
+"""
+
+# ------------------------------------------------------------
+# 5️⃣ Generate Architecture (first time)
+# ------------------------------------------------------------
 def design_architecture(analysis_file_path: str) -> dict:
-    """
-    Reads analyzed project details from JSON and generates a
-    technical architecture plan with recommended technologies and modules.
-    """
-
-    # Ensure input file exists
     if not os.path.exists(analysis_file_path):
-        raise FileNotFoundError(f"❌ File not found: {analysis_file_path}")
+        raise FileNotFoundError(f"❌ Missing: {analysis_file_path}")
 
-    # Load analysis JSON
-    with open(analysis_file_path, "r", encoding="utf-8") as f:
-        analysis_data = json.load(f)
-
-    # Convert to string for LLM context
+    analysis_data = json.loads(open(analysis_file_path, "r").read())
     project_context = json.dumps(analysis_data, indent=2)
 
-    # -----------------------------------------------------------------
-    # 3A️⃣ Build prompts
-    # -----------------------------------------------------------------
-    system_prompt = SystemMessage(content=(
-        "You are a senior software architect. "
-        "Given structured project details, design a full technical architecture. "
-        "Respond ONLY with valid JSON. No text outside JSON or markdown fences. "
-        "Your JSON must include the following keys:\n"
-        "architecture (frontend, backend, database, cloud), "
-        "recommended_stack (libraries, frameworks), "
-        "modules (major functional modules), and "
-        "data_flow (high-level explanation)."
-    ))
+    prompt = f"""
+You are a senior enterprise solution architect.
 
-    human_prompt = HumanMessage(content=f"Project details:\n{project_context}")
+Your task:
+Generate a COMPLETE architecture using the following STRICT JSON schema:
 
-    # -----------------------------------------------------------------
-    # 3B️⃣ Generate response
-    # -----------------------------------------------------------------
-    response = llm.invoke([system_prompt, human_prompt])
-    raw_output = response.content.strip()
+SCHEMA:
+{ARCH_SCHEMA}
 
-    # Clean output (remove ```json fences if any)
-    cleaned = raw_output.replace("```json", "").replace("```", "").strip()
+RULES:
+- Follow schema EXACTLY.
+- "architecture" MUST be an OBJECT with frontend, backend, database, cloud.
+- "recommended_stack" MUST be a LIST.
+- "modules" MUST be a LIST of objects.
+- "data_flow" MUST contain a single field "description".
+- "diagram_graphviz" MUST be a VALID Graphviz DOT diagram.
+- NO markdown, NO extra text.
 
-    # Attempt to parse JSON
-    try:
-        result = json.loads(cleaned)
-    except json.JSONDecodeError:
-        # Auto-fix truncated JSON if needed
-        if not cleaned.endswith("}"):
-            cleaned += "}"
-        try:
-            result = json.loads(cleaned)
-        except Exception:
-            result = {"raw_response": raw_output}
-    except Exception:
-        result = {"raw_response": raw_output}
-
-    return result
+DIAGRAM RULES:
+- Generate a beautiful diagram of the architecture
+- Use Nodes and edges
+- use colours
 
 
-# ---------------------------------------------------------------------
-# 4️⃣ Save Architecture Plan
-# ---------------------------------------------------------------------
+Project Requirements:
+{project_context}
+"""
+
+    return _ask_llm(prompt)
+
+# ------------------------------------------------------------
+# 6️⃣ Re-Generate Architecture With Feedback
+# ------------------------------------------------------------
+def redesign_architecture(analysis_file_path: str, feedback: str) -> dict:
+    analysis_data = json.loads(open(analysis_file_path, "r").read())
+    context = json.dumps(analysis_data, indent=2)
+
+    prompt = f"""
+You are a senior enterprise architect.
+
+Re-generate the architecture STRICTLY following this schema:
+
+SCHEMA:
+{ARCH_SCHEMA}
+
+User feedback that MUST be applied:
+{feedback}
+
+RULES:
+- Follow the schema exactly.
+- "architecture" MUST be an object with 4 fields.
+- Use Nodes and edges to display the diagram instead of recatangular box
+- Strictly Use colours to make architecutre more attractive
+- "modules" MUST be a list of objects.
+- "diagram_graphviz" MUST be valid DOT.
+- Output JSON ONLY. No text outside the JSON.
+
+Project details:
+{context}
+"""
+
+    return _ask_llm(prompt)
+
+# ------------------------------------------------------------
+# 7️⃣ Save Architecture JSON
+# ------------------------------------------------------------
 def save_architecture(project_id: str, architecture_data: dict):
-    """
-    Saves the generated architecture JSON to data/projects/architecture_<project_id>.json
-    """
     os.makedirs("data/projects", exist_ok=True)
-
-    output_path = os.path.join("data", "projects", f"architecture_{project_id}.json")
-    with open(output_path, "w", encoding="utf-8") as f:
+    path = f"data/projects/architecture_{project_id}.json"
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(architecture_data, f, indent=4)
+    print(f"✅ Architecture saved → {path}")
 
-    print(f"✅ Architecture saved to {output_path}")
-
-
-# ---------------------------------------------------------------------
-# 5️⃣ Test Run (Optional)
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------
+# Optional Test
+# ------------------------------------------------------------
 def main():
-    input_file = "data/projects/analysis_001.json"
-    architecture_plan = design_architecture(input_file)
-    if isinstance(architecture_plan, dict):
-        save_architecture("001", architecture_plan)
-        print("✅ Architect completed.")
-        return architecture_plan
-    else:
-        print("⚠️ Architect result invalid.")
-        return None
+    result = design_architecture("data/projects/analysis_001.json")
+    save_architecture("001", result)
+    print("🚀 Architecture generation complete.")
 
 if __name__ == "__main__":
     main()
