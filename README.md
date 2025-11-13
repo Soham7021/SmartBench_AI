@@ -280,7 +280,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 Have questions or need help?
 
-- 📧 **Email**: [your-email@example.com](mailto:your-email@example.com)
+- 📧 **Email**: [nimbalkarss123@gmail.com](mailto:your-email@example.com)
 - 🐛 **Issues**: [GitHub Issues](https://github.com/Soham7021/SmartBench_AI/issues)
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/Soham7021/SmartBench_AI/discussions)
 
